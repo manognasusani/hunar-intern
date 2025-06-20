@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hema | Personal Homepage</title>
+  <title>manogna | Personal Homepage</title>
   <style>
     body {
       margin: 0;
@@ -102,14 +102,14 @@
     <div class="card">
       <h2>Connect With Me through</h2>
       <div class="social-buttons">
-        <a href="https://www.linkedin.com/in/yourprofile" class="btn linkedin" target="_blank">LinkedIn</a>
-        <a href="https://github.com/yourusername" class="btn github" target="_blank">GitHub</a>
-        <a href="mailto:youremail@example.com" class="btn email">Email</a>
+        <a href="https://www.linkedin.com/in/manogna-susani-66b592338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="btn linkedin" target="_blank">LinkedIn</a>
+        <a href="https://github.com/manognasusani" class="btn github" target="_blank">GitHub</a>
+        <a href="mailto:manognasusani67@gmail.com" class="btn email">Email</a>
       </div>
     </div>
 
     <footer>
-      © 2024 Hema. All rights reserved.
+      © 2024 manogna. All rights reserved.
     </footer>
   </div>
 
