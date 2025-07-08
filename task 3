@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix Clone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #141414;
+      color: white;
+    }
+
+    header {
+      background-color: #e50914;
+      padding: 1rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .search-bar {
+      text-align: center;
+      margin: 1rem;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      max-width: 400px;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .movie-section {
+      padding: 1rem;
+    }
+
+    .movie-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .movie-card {
+      width: 150px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 220px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .movie-card p {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .movie-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #f40612;
+    }
+
+    @media (max-width: 600px) {
+      .movie-card {
+        width: 100px;
+      }
+
+      header {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Netflix Clone</header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for a movie or series..." oninput="filterMovies()">
+  </div>
+
+  <section class="movie-section">
+    <div class="movie-list" id="movie-list"></div>
+  </section>
+
+  <div class="movie-modal" id="movie-modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+      <button onclick="playVideo()">▶ Play</button>
+    </div>
+  </div>
+
+  <script>
+    const movies = [
+      {
+        title: "Kalki 2898 AD",
+        description: "A futuristic sci-fi epic starring Prabhas.",
+        image: "https://image.tmdb.org/t/p/w500/tLxjbT5ROZRwYcpNT0FEMKzL3bG.jpg"
+      },
+      {
+        title: "Hanuman",
+        description: "A superhero tale rooted in Indian mythology.",
+        image: "https://image.tmdb.org/t/p/w500/s4LM4D49MYxaUodui6wGyCvKKo6.jpg"
+      },
+      {
+        title: "Salaar",
+        description: "A dark and gritty gangster drama.",
+        image: "https://image.tmdb.org/t/p/w500/jO88P6xRcGA3opjRAaPR2XpAl4E.jpg"
+      },
+      {
+        title: "Game Changer",
+        description: "A political thriller starring Ram Charan.",
+        image: "https://image.tmdb.org/t/p/w500/nEqlfNKnz03WxZmf0RduCMsZIXx.jpg"
+      },
+      {
+        title: "RRR",
+        description: "Two freedom fighters battle the British empire.",
+        image: "https://image.tmdb.org/t/p/w500/dlC0ed9Ugh3FzydnkBtV5UcrF9n.jpg"
+      },
+      {
+        title: "Pushpa",
+        description: "A smuggler's rise to power.",
+        image: "https://image.tmdb.org/t/p/w500/h1ZAQ5JNB6irukQYVYDGMNwFjqg.jpg"
+      },
+      {
+        title: "Squid Game",
+        description: "Deadly survival games for money.",
+        image: "https://image.tmdb.org/t/p/w500/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg"
+      },
+      {
+        title: "Money Heist",
+        description: "A criminal mastermind plans a heist.",
+        image: "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg"
+      },
+      {
+        title: "Stranger Things",
+        description: "Supernatural events in a small town.",
+        image: "https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg"
+      },
+      {
+        title: "The Boys S4",
+        description: "Superheroes gone rogue.",
+        image: "https://image.tmdb.org/t/p/w500/rkB4LyZHo1NHXFEDHl9vSD9r1lI.jpg"
+      },
+      {
+        title: "Mirzapur S3",
+        description: "Power and crime in Mirzapur.",
+        image: "https://image.tmdb.org/t/p/w500/ikBZ9qCkFY7FyOxl5U1gRk1tnl9.jpg"
+      }
+    ];
+
+    const movieList = document.getElementById("movie-list");
+    const searchInput = document.getElementById("searchInput");
+    const modal = document.getElementById("movie-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDescription = document.getElementById("modal-description");
+
+    function renderMovies(filteredMovies = movies) {
+      movieList.innerHTML = "";
+      filteredMovies.forEach((movie) => {
+        const card = document.createElement("div");
+        card.classList.add("movie-card");
+        card.innerHTML = `
+          <img src="${movie.image}" alt="${movie.title}" />
+          <p>${movie.title}</p>
+        `;
+        card.onclick = () => openModal(movie);
+        movieList.appendChild(card);
+      });
+    }
+
+    function openModal(movie) {
+      modalTitle.textContent = movie.title;
+      modalDescription.textContent = movie.description;
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function playVideo() {
+      alert("🎬 Now Playing... (Simulated Playback)");
+    }
+
+    function filterMovies() {
+      const keyword = searchInput.value.toLowerCase();
+      const filtered = movies.filter(movie =>
+        movie.title.toLowerCase().includes(keyword)
+      );
+      renderMovies(filtered);
+    }
+
+    renderMovies();
+  </script>
+</body>
+</html>
+
