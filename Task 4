@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us Section</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e6f0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #f3e9e2;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .top-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-section img {
+      width: 250px;
+      border-radius: 20px;
+    }
+    .about-text {
+      max-width: 600px;
+    }
+    .about-text h2 {
+      margin-bottom: 10px;
+    }
+    .about-text p {
+      line-height: 1.6;
+    }
+    .contact-button {
+      margin-top: 10px;
+    }
+    .contact-button button {
+      padding: 10px 20px;
+      border: none;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .bottom-boxes {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .box {
+      background-color: #ff6e40;
+      color: white;
+      padding: 20px;
+      flex: 1;
+      min-width: 200px;
+      border-radius: 15px;
+    }
+    .box h4 {
+      margin-top: 0;
+    }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+    <div class="top-section">
+      <img src="D:\mobile.jpg" alt="Mobile in hand" />
+      <div class="about-text">
+        <h2>About Us</h2>
+        <h4>Sample Headline</h4>
+        <p>
+          Our HTML course is designed to introduce beginners to the core structure 
+of web development. 
+          Students will learn how to create webpages using semantic HTML tags, 
+structure content effectively, 
+          and build layouts that work across all devices. Whether you're a student,
+ freelancer, or aspiring 
+          developer, this course will help you gain the foundation needed to start 
+your web development journey.
+        </p>
+        <div class="contact-button">
+          <button>CONTACT US</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-boxes">
+      <div class="box">
+ 📞        <h4> CALL US</h4>
+        <p>1 (91) 567-116<br/>1 (91) 876-324</p>
+      </div>
+      <div class="box">
+ 📍        <h4> LOCATION</h4>
+        <p>121 Rock Street, 21 Avenue,<br/>Hyderabad, NY 96703-90679</p>
+      </div>
+      <div class="box">
+ ⏰        <h4> HOURS</h4>
+        <p>Mon - Fri: 6 am - 8 pm<br/>Sat - Sun: 11 am - 6 pm</p>
+      </div>
+    </div>
+  </div>
+ </body>
+ </html>
